@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Weather App</title>
+    <title>WeatherSense</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.min.css">
+    <link rel="icon" href="img/favicon.svg">
     <script src="js/main.js" type="module"></script>
 </head>
 <body>
@@ -18,7 +19,7 @@
             <form id="searchBar__form" class="searchBar__form" role="search">
                 <label for="searchBar__text" class="offscreen">Enter a New Location</label>
                 <input id="searchBar__text" class="searchBar__text" type="text" role="searchbox" size="40" autocomplete="off" placeholder="City, State, Country">
-                <button id="searchBar__button" class="searchBar__button button" title="Submit Location" aria-label="Enter Zip code or City, State, and Country to retrieve Weather conditions">
+                <button id="searchBar__button" class="searchBar__button button" title="Submit Location" aria-label="Submit Search">
                     <i class="fa fa-search"></i>
                     <i class="fas fa-sync fa-spin none"></i>
                 </button>
@@ -29,7 +30,8 @@
             <h2 id="currentForecast__location" class="currentForecast__location">Current Conditions</h2>
             <div id="currentForecast__conditions" class="currentForecast__conditions"></div>
         </section>
-        <a href="#dailyForecast" class="skip-link">Skip to Six Day Forecast</a>
+        <!-- <a href="#dailyForecast" class="skip-link">Skip to Six Day Forecast</a> -->
+        <a href="#dailyForecast" class="skip-link">Skip to 3 Hours Forecast</a>
         <nav id="navButtons" class="navButtons fade-in">
             <button id="getLocation" class="button" title="Get Location" aria-label="Get the current weather conditions for your current location">
                 <i class="fas fa-map-marker-alt"></i>
@@ -54,7 +56,8 @@
         </nav>
         <hr class="fade-in">
         <section id="dailyForecast" class="dailyForecast fade-in" role="region" aria-labelledby="dailyForecast__title">
-            <h2 id="dailyForecast__title" class="dailyForecast__title offscreen">Six Day Forecast</h2>
+            <!-- <h2 id="dailyForecast__title" class="dailyForecast__title offscreen">Six Day Forecast</h2> -->
+            <h2 id="dailyForecast__title" class="dailyForecast__title offscreen">3 Hours Forecast</h2>
             <div id="dailyForecast__contents" class="dailyForecast__contents"></div>
         </section>
         <p id="confirmation" class="offscreen" aria-live="assertive"></p>
