@@ -144,13 +144,13 @@ const buildScreenReaderWeather = (weatherJson, locationObj) => {
   const location = locationObj.getName();
   const unit = locationObj.getUnit();
   const tempUnit = unit === "imperial" ? "fahernheit" : "celsius";
-  return `${weatherJson.list[0].weather[0].description} and ${Math.round((Number(weatherJson.list[0].main.temp) - 273) * 1.8 + 32)}°${tempUnit} in ${location}`;
-  // return tempUnit === "fahernheit" ? `${weatherJson.list[0].weather[0].description} and ${Math.round(
-  //   (Number(weatherJson.list[0].main.temp) - 273) * 1.8 + 32)}
-  // °${tempUnit} in ${location}` 
-  // : `${weatherJson.list[0].weather[0].description} and ${Math.round(
-  //   (Number(weatherJson.list[0].main.temp) - 273))}
-  // °${tempUnit} in ${location}` ;
+  // return `${weatherJson.list[0].weather[0].description} and ${Math.round((Number(weatherJson.list[0].main.temp) - 273) * 1.8 + 32)}°${tempUnit} in ${location}`;
+  return tempUnit === "fahernheit" ? `${weatherJson.list[0].weather[0].description} and ${Math.round(
+    (Number(weatherJson.list[0].main.temp) - 273) * 1.8 + 32)}
+  °${tempUnit} in ${location}` 
+  : `${weatherJson.list[0].weather[0].description} and ${Math.round(
+    (Number(weatherJson.list[0].main.temp) - 273))}
+  °${tempUnit} in ${location}` ;
 };
 
 const setFocusOnSearch = () => {
@@ -165,49 +165,52 @@ const createCurrentConditionsDivs = (weatherObj, unit) => {
     weatherObj.list[0].weather[0].description
   );
 
-  // const currentTemp = tempUnit === "F" ? 
-  //   `${Math.round((Number(weatherObj.list[0].main.temp) - 273) * 1.8 + 32)}°`
-  //   : `${Math.round(Number(weatherObj.list[0].main.temp) - 273)}°`;
-  // const currentFeels = tempUnit === "F" ?
-  //   `feels like ${Math.round((Number(weatherObj.list[0].main.feels_like) - 273) * 1.8 + 32)}°`
-  //   : `feels like ${Math.round(Number(weatherObj.list[0].main.feels_like) - 273)}°`;
-  // const currentMax = tempUnit === "F" ?
-  //   `High ${Math.round((Number(weatherObj.list[0].main.temp_max) - 273) * 1.8 + 32)}°`
-  //   : `High ${Math.round(Number(weatherObj.list[0].main.temp_max) - 273)}°`;
-  // const currentMin = tempUnit === "F" ?
-  //   `High ${Math.round((Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32)}°`
-  //   : `High ${Math.round(Number(weatherObj.list[0].main.temp_min) - 273)}°`;
+  const currentTemp = tempUnit === "F" ? 
+    `${Math.round((Number(weatherObj.list[0].main.temp) - 273) * 1.8 + 32)}°`
+    : `${Math.round(Number(weatherObj.list[0].main.temp) - 273)}°`;
+  const currentFeels = tempUnit === "F" ?
+    `feels like ${Math.round((Number(weatherObj.list[0].main.feels_like) - 273) * 1.8 + 32)}°`
+    : `feels like ${Math.round(Number(weatherObj.list[0].main.feels_like) - 273)}°`;
+  const currentMax = tempUnit === "F" ?
+    `High ${Math.round((Number(weatherObj.list[0].main.temp_max) - 273) * 1.8 + 32)}°`
+    : `High ${Math.round(Number(weatherObj.list[0].main.temp_max) - 273)}°`;
+  const currentMin = tempUnit === "F" ?
+    `High ${Math.round((Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32)}°`
+    : `High ${Math.round(Number(weatherObj.list[0].main.temp_min) - 273)}°`;
 
   // We got Temp/feels/maxTemp/minTemp/ in Kelvin. So, we converted into Fahernheit & celsius.
   const temp = createElem(
     "div",
     "temp",
-    // currentTemp,
-    // tempUnit
-    `${Math.round((Number(weatherObj.list[0].main.temp) - 273) * 1.8 + 32)}°`, tempUnit
+    currentTemp,
+    tempUnit
+    // `${Math.round((Number(weatherObj.list[0].main.temp) - 273) * 1.8 + 32)}°`, tempUnit
   );
   const properDesc = toProperCase(weatherObj.list[0].weather[0].description);
   const desc = createElem("div", "desc", properDesc);
   const feels = createElem(
     "div",
     "feels",
-    `feels like ${Math.round(
-      (Number(weatherObj.list[0].main.feels_like) - 273) * 1.8 + 32
-    )}°`
+    currentFeels
+    // `feels like ${Math.round(
+    //   (Number(weatherObj.list[0].main.feels_like) - 273) * 1.8 + 32
+    // )}°`
   );
   const maxTemp = createElem(
     "div",
     "maxtemp",
-    `High ${Math.round(
-      (Number(weatherObj.list[0].main.temp_max) - 273) * 1.8 + 32
-    )}°`
+    currentMax
+    // `High ${Math.round(
+    //   (Number(weatherObj.list[0].main.temp_max) - 273) * 1.8 + 32
+    // )}°`
   );
   const minTemp = createElem(
     "div",
     "mintemp",
-    `Low ${Math.round(
-      (Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32
-    )}°`
+    currentMin
+    // `Low ${Math.round(
+    //   (Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32
+    // )}°`
   );
   const humidity = createElem(
     "div",
