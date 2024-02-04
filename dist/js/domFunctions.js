@@ -81,7 +81,7 @@ export const updateDisplay = (weatherJson, locationObj) => {
   displayCurrentConditions(ccArray);
   // six day forecast according to Project
   // But here we Display Weather Data of after 3 hours, 6 hours, 9 hours, etc.
-  displaySixDayForecast(weatherJson);
+  displaySixDayForecast(weatherJson, locationObj.getUnit());
   setFocusOnSearch();
   fadeDisplay();
 };
@@ -175,8 +175,8 @@ const createCurrentConditionsDivs = (weatherObj, unit) => {
     `High ${Math.round((Number(weatherObj.list[0].main.temp_max) - 273) * 1.8 + 32)}°`
     : `High ${Math.round(Number(weatherObj.list[0].main.temp_max) - 273)}°`;
   const currentMin = tempUnit === "F" ?
-    `High ${Math.round((Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32)}°`
-    : `High ${Math.round(Number(weatherObj.list[0].main.temp_min) - 273)}°`;
+    `Low ${Math.round((Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32)}°`
+    : `Low ${Math.round(Number(weatherObj.list[0].main.temp_min) - 273)}°`;
 
   // We got Temp/feels/maxTemp/minTemp/ in Kelvin. So, we converted into Fahernheit & celsius.
   const temp = createElem(
@@ -307,14 +307,15 @@ const displayCurrentConditions = (currentConditionsArray) => {
   });
 };
 
-const displaySixDayForecast = (weatherJson) => {
+const displaySixDayForecast = (weatherJson, unit) => {
+  const tempUnit = unit === "imperial" ? "F" : "C";
   for (let i = 1; i <= 6; i++) {
-    const dfArray = createDailyForecastDivs(weatherJson.list[i]);
+    const dfArray = createDailyForecastDivs(weatherJson.list[i], tempUnit);
     displayDailyForecast(dfArray);
   }
 };
 
-const createDailyForecastDivs = (dayWeather) => {
+const createDailyForecastDivs = (dayWeather, tempUnit) => {
   const dayAbbreviationText = getDayAbbreviation(dayWeather.dt);
   const dayAbbreviation = createElem(
     "p",
@@ -325,15 +326,25 @@ const createDailyForecastDivs = (dayWeather) => {
     dayWeather.weather[0].icon,
     dayWeather.weather[0].description
   );
+
+  const dayHighTemp = tempUnit === "F" ?
+  `${Math.round((Number(dayWeather.main.temp_max) - 273) * 1.8 + 32)}`
+  : `${Math.round(Number(dayWeather.main.temp_max) - 273)}`;
   const dayHigh = createElem(
     "p",
     "dayHigh",
-    `${Math.round((Number(dayWeather.main.temp_max) - 273) * 1.8 + 32)}°`
+    dayHighTemp
+    // `${Math.round((Number(dayWeather.main.temp_max) - 273) * 1.8 + 32)}°`
   );
+
+  const dayLowTemp = tempUnit === "F" ?
+  `${Math.round((Number(dayWeather.main.temp_min) - 273) * 1.8 + 32)}`
+  : `${Math.round(Number(dayWeather.main.temp_min) - 273)}`;
   const dayLow = createElem(
     "p",
     "dayLow",
-    `${Math.round((Number(dayWeather.main.temp_min) - 273) * 1.8 + 32)}°`
+    dayLowTemp
+    // `${Math.round((Number(dayWeather.main.temp_min) - 273) * 1.8 + 32)}°`
   );
   return [dayAbbreviation, dayIcon, dayHigh, dayLow];
 };
