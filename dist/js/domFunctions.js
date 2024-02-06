@@ -1,4 +1,4 @@
-// JS media Query apply after reload of the page because of that Changes happen when function call.
+// JavaScript media Query apply after reload of the page because of that Changes happen when function call.
 export const setPlaceholderText = () => {
   const input = document.getElementById("searchBar__text");
   window.innerWidth < 400
