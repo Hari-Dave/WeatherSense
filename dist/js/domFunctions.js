@@ -178,7 +178,7 @@ const createCurrentConditionsDivs = (weatherObj, unit) => {
     `Low ${Math.round((Number(weatherObj.list[0].main.temp_min) - 273) * 1.8 + 32)}°`
     : `Low ${Math.round(Number(weatherObj.list[0].main.temp_min) - 273)}°`;
 
-  // We got Temp/feels/maxTemp/minTemp/ in Kelvin. So, we converted into Fahernheit & celsius.
+  // We got Temp/feels/maxTemp/minTemp/ in Kelvin(k). So, we converted into Fahernheit & celsius.
   const temp = createElem(
     "div",
     "temp",
