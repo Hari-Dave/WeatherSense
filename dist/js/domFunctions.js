@@ -79,7 +79,7 @@ export const updateDisplay = (weatherJson, locationObj) => {
     locationObj.getUnit()
   );
   displayCurrentConditions(ccArray);
-  // six day forecast according to Project
+  // six day forecast according to Project...
   // But here we Display Weather Data of after 3 hours, 6 hours, 9 hours, etc.
   displaySixDayForecast(weatherJson, locationObj.getUnit());
   setFocusOnSearch();
